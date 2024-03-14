@@ -14,9 +14,18 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.2.2
+        bundler-cache: true
     - name: Release to Confluence
       shell: bash
       run: |
         find .
+        bundle exec rake test
       env:
+        CONFIG_FILE: ${{ inputs.config }}
         CONFLUENCE_API_TOKEN: ${{ inputs.token }}
