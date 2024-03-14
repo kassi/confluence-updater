@@ -1,0 +1,22 @@
+name: Confluence Updater
+author: Karsten Silkenbäumer
+description: Creates or updates pages in Confluence Cloud based on a configuration.
+
+inputs:
+  config:  # id of input
+    description: 'Configuration file'
+    required: true
+    default: config.yaml
+  token:
+    description: Confluence API token
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Release to Confluence
+      shell: bash
+      run: |
+        find .
+      env:
+        CONFLUENCE_API_TOKEN: ${{ inputs.token }}

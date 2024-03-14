@@ -1,0 +1,19 @@
+name: Test Workflow
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Update Confluence
+    steps:
+      - name: Confluence Updater
+        uses: kassi/confluence-updater@main
+        with:
+          config: test/config.yaml
+          token: dummy
